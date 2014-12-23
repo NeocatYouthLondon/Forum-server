@@ -23,8 +23,9 @@ var loginSchema = mongoose.Schema({
 var Login = mongoose.model('Login', loginSchema);	
 	
 exports.findAll = function(req, res){
+
 	var thisResult = null;
-	Project.find(function(err, users){
+	User.find(function(err, users){
 		if(err) return console.error(err);
 		res.send(users);
 	});
@@ -52,7 +53,7 @@ exports.findAll = function(req, res){
 //needs to send continuation key if login works.
 exports.login = function(req, res){
 	var loginDetails = req.body;
-
+	
 	if(loginDetails.userName && loginDetails.password){
 		Login.findOne({'userName':loginDetails.userName, 'password':loginDetails.password}, function(err, doc){
 			if(doc){

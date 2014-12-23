@@ -9,6 +9,7 @@ var Project = mongoose.model('Project', projectSchema);
 	
 exports.findAll = function(req, res){
 	var thisResult = null;
+	
 	Project.find(function(err, projects){
 		if(err) return console.error(err);
 		res.send(projects);

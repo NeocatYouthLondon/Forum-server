@@ -9,6 +9,7 @@ var threadSchema = mongoose.Schema({
 var Thread = mongoose.model('Thread', threadSchema);
 	
 exports.findAll = function(req, res){
+	
 	var thisResult = null;
 	Thread.find(function(err, threads){
 		if(err) return console.error(err);

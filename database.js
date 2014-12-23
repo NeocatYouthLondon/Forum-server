@@ -5,7 +5,7 @@ mongoose.connect("mongodb://Admin:lolhaha123@ds027491.mongolab.com:27491/nycl-fo
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
-db.once('open', function callback(){
+db.once('open', function callback(err){
 });
 
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -13,6 +13,7 @@ db.once('open', function callback(){
 // You'd typically not find this code in a real-life app, since the database would already exist.
 var populateDB = function(err, db) {
 	
+	console.log(db.collection);
 	console.log("populating database!");
 	
 	var projects = [
@@ -94,26 +95,4 @@ var populateDB = function(err, db) {
 			message: "First post"
 		}
 	];
-	
-	db.collection('projects', function(err, collection){
-		collection.insert(projects, {safe:true}, function(err, result){});
-	});
-	
-	db.collection('logins', function(err, collection){
-		collection.insert(logins, {safe:true}, function(err, result){});
-	});
-	
-	db.collection('users', function(err, collection){
-		collection.insert(users, {safe:true}, function(err, result){});
-	});
-	
-	db.collection('threads', function(err, collection){
-		collection.insert(threads, {safe:true}, function(err, result){});
-	});
- 
-    db.collection('posts', function(err, collection) {
-        collection.insert(posts, {safe:true}, function(err, result) {});
-    });
 };
-
-populateDB(err, db);

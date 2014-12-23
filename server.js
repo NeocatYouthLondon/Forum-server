@@ -1,8 +1,8 @@
 var express = require('express'),
 	database = require('./database'),
-	users = require('./users'),
-	tasks = require('./tasks'),
-	privateMessages = require('./privateMessages'),
+	users = require('./routes/users'),
+	tasks = require('./routes/tasks'),
+	privateMessages = require('./routes/privateMessages'),
 	projects = require('./routes/projects'),
 	threads = require('./routes/threads'),
 	posts = require('./routes/posts');
