@@ -1,7 +1,10 @@
 var express = require('express'),
 	database = require('./database'),
+	users = require('./users'),
+	tasks = require('./tasks'),
+	privateMessages = require('./privateMessages'),
+	projects = require('./routes/projects'),
 	threads = require('./routes/threads'),
-	guide = require('./routes/guide'),
 	posts = require('./routes/posts');
  
 var app = express();
@@ -29,7 +32,6 @@ app.configure(function(){
 	app.use(express.bodyParser());
 });
  
-app.get('/guide', guide.findAll);
 app.get('/threads', threads.findAll);
 app.post('/threads', threads.addThread);
 app.get('/posts', posts.getAllPosts);

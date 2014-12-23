@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var threadSchema = mongoose.Schema({
 	id: String,
+	projectID: String,
 	subject: String
 });
 
