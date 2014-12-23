@@ -16,6 +16,7 @@ var User = mongoose.model('User', userSchema);
 var loginSchema = mongoose.Schema({
 	userID: String, 
 	userName: String,
+	continuationKey: String,
 	password: String
 });
 
@@ -29,6 +30,24 @@ exports.findAll = function(req, res){
 	});
 }
 
+//all posts will have to be checked for key. Must include user: {userName: ##, password: ##, continuationKey: ##}
+/*var correctContinuationKey = function(user){
+	if(user.userName && user.continuationKey)
+	{
+		Login.findOne({'userName': user.userName, 'continuationKey': user.continuationKey}, function(err, doc){
+			if(doc){
+				res.send(doc.continuationKey);
+			}
+			else{
+				res.send(false);
+			}
+		});
+	}
+	else
+	{
+		res.send(false);
+	}
+}*/
 
 //needs to send continuation key if login works.
 exports.login = function(req, res){
@@ -37,7 +56,7 @@ exports.login = function(req, res){
 	if(loginDetails.userName && loginDetails.password){
 		Login.findOne({'userName':loginDetails.userName, 'password':loginDetails.password}, function(err, doc){
 			if(doc){
-				res.send(true);
+				res.send(doc.continuationKey);
 			}
 			else{
 				res.send(false);

@@ -31,7 +31,8 @@ app.configure(function(){
 	app.use(express.logger('dev'));
 	app.use(express.bodyParser());
 });
- 
+
+
 app.get('/threads', threads.findAll);
 app.post('/threads', threads.addThread);
 app.get('/posts', posts.getAllPosts);
