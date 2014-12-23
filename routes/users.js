@@ -56,7 +56,8 @@ exports.login = function(req, res){
 	if(loginDetails.userName && loginDetails.password){
 		Login.findOne({'userName':loginDetails.userName, 'password':loginDetails.password}, function(err, doc){
 			if(doc){
-				res.send(doc.continuationKey);
+				var currentUser = {id: doc.userID, continuationKey: doc.continuationKey};
+				res.send(currentUser);
 			}
 			else{
 				res.send(false);

@@ -32,7 +32,10 @@ app.configure(function(){
 	app.use(express.bodyParser());
 });
 
-
+app.get('/users', users.findAll);
+app.get('/login', users.login);
+app.get('/projects', projects.findAll);
+app.post('/projects', projects.addProject);
 app.get('/threads', threads.findAll);
 app.post('/threads', threads.addThread);
 app.get('/posts', posts.getAllPosts);

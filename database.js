@@ -1,7 +1,7 @@
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
-//mongoose.connect("mongodb://Admin:lolhaha123@ds027491.mongolab.com:27491/nycl-forum");
+mongoose.connect("mongodb://Admin:lolhaha123@ds027491.mongolab.com:27491/nycl-forum");
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
@@ -12,40 +12,96 @@ db.once('open', function callback(){
 // Populate database with sample data -- Only used once: the first time the application is started.
 // You'd typically not find this code in a real-life app, since the database would already exist.
 var populateDB = function(err, db) {
+	
+	console.log("populating database!");
+	
+	var projects = [
+		{
+			id: "0",
+			name: "Misc"
+		}
+	];
+
 	var threads = [
 		{
-			id: "1",
-			subject: "Welcome to the forum!",
-			posts: []
+			id: "0",
+			projectID: "0",
+			subject: "Welcome to the forum!"
 		}
 	];
 	
 	var users = [
+			{
+				id: "0",
+				firstName: "Michal",
+				surname: "Paszkiewicz",
+				imageURL: "http://www.gravatar.com/avatar/f8231ccab5f14c6499e32e17700399d9?d=wavatar",
+				websiteURL: "http://www.michalpaszkiewicz.co.uk",
+				experience: "8 years live guitar playing",
+				skills: "Software",
+				openToPublic: true
+			},
+			{
+				id: "1",
+				firstName: "Aaron",
+				surname: "Dennis",
+				imageURL: "https://avatars3.githubusercontent.com/u/9275082?v=3&amp",
+				websiteURL: "https://aaronjden.github.io",
+				experience: "Lots of good experience",
+				skills: "Software",
+				openToPublic: true 
+			},
+			{
+				id: "2",
+				firstName: "David",
+				surname: "Fairbairn",
+				imageURL: "https://avatars2.githubusercontent.com/u/8076321?v=3&amp",
+				websiteURL: "http://tametheboardgame.com/",
+				experience: "40 years in the circus industry",
+				skills: "Juggling",
+				openToPublic: true
+			}
+	];
+	
+	var logins = [
 		{
-			name: "Admin",
-			id: "0"
+			userID: "0", 
+			userName: "MeowP",
+			continuationKey: "1289384",
+			password: "password"
 		},
 		{
-			name: "Trollface",
-			id: "1"
+			userID: "2", 
+			userName: "DaveDaRave",
+			continuationKey: "128938124",
+			password: "password"
+		},
+		{
+			userID: "1", 
+			userName: "AaronDennis",
+			continuationKey: "1289384",
+			password: "password"
 		}
 	];
 	
     var posts = [
-    {
-        user: "Trollface",
-		userID: "1",
-		threadID: "1",
-		date: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
-		message: "First post"
-    },
-    {
-        user: "Admin",
-		userID: "0",
-		threadID: "1",
-		date: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
-		message: "Welcome to the developer forum for inknote! Feel free to post questions, chat and help each other out. Abusers will burn in a very special level of hell. A level reserved for child molesters and people who talk at the theatre."
-    }];
+		{
+			id: "0",
+			userID: "0",
+			threadID: "0",
+			projectID: "0",
+			date: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+			message: "First post"
+		}
+	];
+	
+	db.collection('projects', function(err, collection){
+		collection.insert(projects, {safe:true}, function(err, result){});
+	});
+	
+	db.collection('logins', function(err, collection){
+		collection.insert(logins, {safe:true}, function(err, result){});
+	});
 	
 	db.collection('users', function(err, collection){
 		collection.insert(users, {safe:true}, function(err, result){});
@@ -59,3 +115,5 @@ var populateDB = function(err, db) {
         collection.insert(posts, {safe:true}, function(err, result) {});
     });
 };
+
+populateDB(err, db);
