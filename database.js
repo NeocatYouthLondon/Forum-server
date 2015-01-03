@@ -1,7 +1,7 @@
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
-mongoose.connect("mongodb://Admin:lolhaha123@ds027491.mongolab.com:27491/nycl-forum");
+mongoose.connect("mongodb://###:###@ds027491.mongolab.com:27491/nycl-forum");
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
